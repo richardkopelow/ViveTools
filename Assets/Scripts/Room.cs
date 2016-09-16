@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class MainMenuRoom : MonoBehaviour
+public class Room : MonoBehaviour
 {
+    public Renderer LightCube;
+
     void Start()
     {
 
@@ -10,6 +12,6 @@ public class MainMenuRoom : MonoBehaviour
     
     void Update()
     {
-
+        DynamicGI.UpdateMaterials(LightCube);
     }
 }
