@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    void Start()
-    {
+    public Transform PlayerHead;
 
-    }
-    
-    void Update()
+    public void OnPlayClicked()
     {
+        VRPhysicsPlayer.Height = PlayerHead.localPosition.y;
+        SceneManager.LoadScene("PlayScene");
     }
 }

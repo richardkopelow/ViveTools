@@ -13,6 +13,7 @@ public class VRPhysicsPlayer : MonoBehaviour
     public static float Height;
 
     public Transform Head;
+    Vector3 playerLastPosition;
     CapsuleCollider body;
 
     Rigidbody rigid;
@@ -23,7 +24,7 @@ public class VRPhysicsPlayer : MonoBehaviour
         body = Head.gameObject.AddComponent<CapsuleCollider>();
         rigid = GetComponent<Rigidbody>();
     }
-    
+
     void Update()
     {
         float bodyHeight = Head.localPosition.y;
@@ -45,11 +46,16 @@ public class VRPhysicsPlayer : MonoBehaviour
                     {
                         //player is no longer falling
                         gravState = GravStateEnum.FallingVirtual;
+                        rigid.useGravity = true;
+                        //add player real world velocity to the rigidbody
+                        rigid.velocity += (Head.position + bodyCenter - playerLastPosition) / Time.deltaTime;
                     }
                     else
                     {
+                        playerLastPosition = Head.position + bodyCenter;
                         //Player is currently falling in the real world
-                        rigid.AddForce(Vector3.up * grav, ForceMode.Acceleration);//Cancels out virtual acceleration because real world acceleration is moving the player
+                        rigid.useGravity = false;//Turns off virtual gravity because real world acceleration is moving the player
+                        //rigid.AddForce(Vector3.up * grav, ForceMode.Acceleration);
                         RaycastHit hit;
                         if (Physics.Raycast(new Vector3(Head.position.x, Head.position.y - bodyHeight, Head.position.z), Vector3.down, out hit))
                         {
@@ -61,9 +67,9 @@ public class VRPhysicsPlayer : MonoBehaviour
             case GravStateEnum.FallingVirtual:
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(new Vector3(Head.position.x, Head.position.y - bodyHeight, Head.position.z), Vector3.down, out hit))
+                    if (Physics.Raycast(new Vector3(Head.position.x, Head.position.y - bodyHeight, Head.position.z), Vector3.down, out hit, 0.1f))
                     {
-
+                        gravState = GravStateEnum.OnGround;
                     }
                 }
                 break;
@@ -79,5 +85,20 @@ public class VRPhysicsPlayer : MonoBehaviour
                 break;
         }
 
+    }
+
+    public Gain FilterGains(Gain gain)
+    {
+        switch (gravState)
+        {
+            //case GravStateEnum.FallingReal:
+            //    break;
+            case GravStateEnum.FallingVirtual:
+                return new Gain(-1, -1, -1, -1);
+                break;
+            default:
+                return gain;
+                break;
+        }
     }
 }

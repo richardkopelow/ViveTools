@@ -2,13 +2,14 @@ using UnityEngine;
 using System.Collections;
 using Valve.VR;
 
-public class VRGains : MonoBehaviour
+public class VRGainsPlayer : MonoBehaviour
 {
     public Transform Player;
     public GainsZone Zone;
 
 
     Transform trans;
+    VRPhysicsPlayer physicsPlayer;
     SteamVR_PlayArea playArea;
     Vector3 lastPlayerPos;
 
@@ -16,6 +17,7 @@ public class VRGains : MonoBehaviour
     void Start()
     {
         trans = GetComponent<Transform>();
+        physicsPlayer = GetComponent<VRPhysicsPlayer>();
         playArea = GetComponent<SteamVR_PlayArea>();
         gains = new Gain();
         lastPlayerPos = Player.localPosition;
@@ -27,6 +29,11 @@ public class VRGains : MonoBehaviour
 
         #endregion
         gains.Calc(playArea, Zone, Player);
+
+        if (physicsPlayer!=null)
+        {
+            gains = physicsPlayer.FilterGains(gains);
+        }
 
         Vector3 diff = Player.localPosition - lastPlayerPos;
         float xGain = diff.x < 0?gains.NegX:gains.PosX;

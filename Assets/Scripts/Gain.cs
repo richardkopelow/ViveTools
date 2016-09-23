@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-class Gain
+public class Gain
 {
     public enum Direction
     {
@@ -21,6 +21,17 @@ class Gain
     public float NegX { get; set; }
     public float PosZ { get; set; }
     public float NegZ { get; set; }
+
+    public Gain():this(1,1,1,1)
+    {
+    }
+    public Gain(float posX, float negX, float posZ, float negZ)
+    {
+        PosX = posX;
+        NegX = negX;
+        PosZ = posZ;
+        NegZ = negZ;
+    }
 
     public void Calc(SteamVR_PlayArea playArea, GainsZone gainsZone, Transform player)
     {
