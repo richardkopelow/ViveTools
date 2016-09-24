@@ -18,14 +18,9 @@ public class GainsZone : MonoBehaviour
         Trans = GetComponent<Transform>();
     }
 
-    void Update()
-    {
-
-    }
-    
     public void OnTriggerEnter(Collider other)
     {
-        VRGainsPlayer player = other.GetComponent<VRGainsPlayer>();
+		VRGainsPlayer player = other.GetComponent<Transform>().parent.GetComponent<VRGainsPlayer>();
         if (player != null)
         {
             player.Zone = this;
@@ -34,7 +29,7 @@ public class GainsZone : MonoBehaviour
     
     public void OnTriggerExit(Collider other)
     {
-        VRGainsPlayer player = other.GetComponent<VRGainsPlayer>();
+        VRGainsPlayer player = other.GetComponent<Transform>().parent.GetComponent<VRGainsPlayer>();
         if (player != null)
         {
             player.Zone = null;

@@ -33,6 +33,11 @@ public class Gain
         NegZ = negZ;
     }
 
+    public override string ToString ()
+	{
+		return string.Format ("[Gain: PosX={0}, NegX={1}, PosZ={2}, NegZ={3}]", PosX, NegX, PosZ, NegZ);
+	}
+
     public void Calc(SteamVR_PlayArea playArea, GainsZone gainsZone, Transform player)
     {
         if (gainsZone == null)

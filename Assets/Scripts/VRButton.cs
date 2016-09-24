@@ -6,8 +6,9 @@ public class VRButton : MonoBehaviour
     public GameObject Receiver;
     public string MethodName;
 
-    public void OnCollisionEnter(Collision collision)
+	public void OnTriggerEnter(Collider other)
     {
+    	Debug.Log("coll");
         Receiver.SendMessage(MethodName);
     }
 }

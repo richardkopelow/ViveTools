@@ -4,11 +4,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public Transform PlayerHead;
-
     public void OnPlayClicked()
     {
-        VRPhysicsPlayer.Height = PlayerHead.localPosition.y;
-        SceneManager.LoadScene("PlayScene");
+        VRPhysicsPlayer.Height = GameObject.Find("Camera (eye)").GetComponent<Transform>().localPosition.y;
+        SceneManager.LoadScene("Sandbox");
     }
 }

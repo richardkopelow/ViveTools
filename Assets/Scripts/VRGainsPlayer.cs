@@ -17,6 +17,7 @@ public class VRGainsPlayer : MonoBehaviour
     void Start()
     {
         trans = GetComponent<Transform>();
+		Player=trans.Find("Camera (eye)");
         physicsPlayer = GetComponent<VRPhysicsPlayer>();
         playArea = GetComponent<SteamVR_PlayArea>();
         gains = new Gain();
@@ -34,7 +35,7 @@ public class VRGainsPlayer : MonoBehaviour
         {
             gains = physicsPlayer.FilterGains(gains);
         }
-
+        Debug.Log("gains: "+gains);
         Vector3 diff = Player.localPosition - lastPlayerPos;
         float xGain = diff.x < 0?gains.NegX:gains.PosX;
         float zGain = diff.z < 0?gains.NegZ:gains.PosZ;
