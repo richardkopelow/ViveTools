@@ -35,7 +35,7 @@ public class VRGainsPlayer : MonoBehaviour
         {
             gains = physicsPlayer.FilterGains(gains);
         }
-        Debug.Log("gains: "+gains);
+        //Debug.Log("gains: "+gains);
         Vector3 diff = Player.localPosition - lastPlayerPos;
         float xGain = diff.x < 0?gains.NegX:gains.PosX;
         float zGain = diff.z < 0?gains.NegZ:gains.PosZ;

@@ -3,12 +3,15 @@ using System.Collections;
 
 public class VRButton : MonoBehaviour
 {
+	public string TriggerTag;
     public GameObject Receiver;
     public string MethodName;
 
 	public void OnTriggerEnter(Collider other)
     {
-    	Debug.Log("coll");
-        Receiver.SendMessage(MethodName);
+    	if(other.tag==TriggerTag||TriggerTag=="")
+    	{
+    		Receiver.SendMessage(MethodName);
+    	}
     }
 }
