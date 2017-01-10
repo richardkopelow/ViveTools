@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class VRPhysicsPlayer : MonoBehaviour
+public class VRRigidbodyPlayer : MonoBehaviour
 {
     const float grav = 9.81f;
     const float boxWidth=0.12f;

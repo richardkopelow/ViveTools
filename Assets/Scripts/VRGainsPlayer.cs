@@ -9,7 +9,7 @@ public class VRGainsPlayer : MonoBehaviour
 
 
     Transform trans;
-    VRPhysicsPlayer physicsPlayer;
+    VRRigidbodyPlayer physicsPlayer;
     SteamVR_PlayArea playArea;
     Vector3 lastPlayerPos;
 
@@ -18,7 +18,7 @@ public class VRGainsPlayer : MonoBehaviour
     {
         trans = GetComponent<Transform>();
 		Player=trans.Find("Camera (eye)");
-        physicsPlayer = GetComponent<VRPhysicsPlayer>();
+        physicsPlayer = GetComponent<VRRigidbodyPlayer>();
         playArea = GetComponent<SteamVR_PlayArea>();
         gains = new Gain();
         lastPlayerPos = Player.localPosition;

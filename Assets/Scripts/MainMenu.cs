@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     public void OnPlayClicked()
     {
-        VRPhysicsPlayer.Height = GameObject.Find("Camera (eye)").GetComponent<Transform>().localPosition.y;
+        VRRigidbodyPlayer.Height = GameObject.Find("Camera (eye)").GetComponent<Transform>().localPosition.y;
         SceneManager.LoadScene("Sandbox");
     }
 }
