@@ -1,5 +1,5 @@
-#Vive Tools
-Vive Tools is a suite of utilities for the HTC Vive, specifically in games that allow the player to move in ways other than walking.
+# Vive Tools
+Vive Tools is a suite of utilities for the HTC Vive and Unity, specifically in games that allow the player to move in ways other than walking.
 
 [Gains Controller](#gains controller)
 [Physics Controller](#Physics controller)
